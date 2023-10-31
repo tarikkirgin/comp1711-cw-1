@@ -58,7 +58,7 @@ int main() {
     int buffer_size = 50;
     char line_buffer[buffer_size];
 
-    // initalise variable to store end of array
+    // initialise variable to store end of array
     int tail = 0;
 
     // read in file contents
