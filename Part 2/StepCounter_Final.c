@@ -40,6 +40,12 @@ void tokeniseRecord(const char *input, const char *delimiter,
     // Free the duplicated string
     free(inputCopy);
 }
+FITNESS_DATA read_file(char filename[]);
+int get_record_count(FITNESS_DATA data[]);
+FITNESS_DATA get_fewest_steps(FITNESS_DATA data[]);
+FITNESS_DATA get_most_steps(FITNESS_DATA data[]);
+int calc_mean_steps(FITNESS_DATA data[]);
+FITNESS_DATA get_continous_period(FITNESS_DATA data[], int minimum_steps);
 
 // Complete the main function
 int main() {
