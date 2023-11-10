@@ -7,7 +7,8 @@
 
 // Define any additional variables here
 // Global variables for filename and FITNESS_DATA array
-
+char filename[20];
+FITNESS_DATA data[300];
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
