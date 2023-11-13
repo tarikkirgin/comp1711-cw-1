@@ -9,6 +9,7 @@
 // Global variables for filename and FITNESS_DATA array
 char filename[20];
 FITNESS_DATA data[300];
+int record_count = 0;
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -53,6 +54,60 @@ void print_menu_options()
     printf("F: Find the longest continous period where the step count is above 500 steps\n");
     printf("Q: Quit\n");
 }
+
+void read_file(char filename[])
+{
+    FILE *file = fopen(filename, "r");
+    // exit if file is null
+    if (file == NULL)
+    {
+        printf("Error: could not open file\n");
+        exit(1);
+    }
+    else
+    {
+        // create buffer
+        int buffer_size = 50;
+        char line_buffer[buffer_size];
+
+        // initialise variable to store end of array
+        int tail = 0;
+
+        // read in file contents
+        while (fgets(line_buffer, buffer_size, file) != NULL)
+        {
+            // create variables to hold data
+            char date[11];
+            char time[6];
+            char steps[10];
+
+            // extract data from line of file
+            tokeniseRecord(line_buffer, ",", date, time, steps);
+
+            // create new FITNESS_DATA struct
+            FITNESS_DATA row;
+
+            // populate struct with values extracted from file
+            strcpy(row.date, date);
+            strcpy(row.time, time);
+            row.steps = atoi(steps); // use atoi() to convert the steps string to an integer
+
+            // add struct to array
+            data[tail] = row;
+            // increment end of array marker
+            tail++;
+        }
+        // save the number of records to a global variable
+        record_count = tail;
+
+        // close file
+        fclose(file);
+
+        printf("File successfully loaded.\n");
+    }
+}
+
+
 
 // Complete the main function
 int main() {
