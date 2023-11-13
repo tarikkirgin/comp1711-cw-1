@@ -19,26 +19,26 @@ void tokeniseRecord(const char *input, const char *delimiter,
 {
     // Create a copy of the input string as strtok modifies the string
     char *inputCopy = strdup(input);
-    
+
     // Tokenize the copied string
     char *token = strtok(inputCopy, delimiter);
     if (token != NULL)
     {
         strcpy(date, token);
     }
-    
+
     token = strtok(NULL, delimiter);
     if (token != NULL)
     {
         strcpy(time, token);
     }
-    
+
     token = strtok(NULL, delimiter);
     if (token != NULL)
     {
         strcpy(steps, token);
     }
-    
+
     // Free the duplicated string
     free(inputCopy);
 }
@@ -110,15 +110,53 @@ void read_file(char filename[])
 
 
 // Complete the main function
-int main() {
-   
+int main()
+{
+    char choice = 'X';
+    int choice_valid = 0;
+    while (!choice_valid)
+    {
+        print_menu_options();
+        printf("Enter choice: ");
+        scanf(" %c", &choice);
+        if(choice == 'Q')
+        {
+            exit(0);
+        }
+        // check choice is between A-F inclusive
+        if (choice >= 65 && choice < 70)
+        {
+            if (choice == 'A') // filename input
+            {
+                printf("Input filename: ");
+                scanf(" %s", &filename);
+                read_file(filename);
+            }
+            if (choice == 'B') // display total number of records
+            {
+                printf("record_count: %d\n", record_count);
+            }
+            if (choice == 'C') // find date and time of timeslot with fewest steps
+            {
+
+            }
+            if (choice == 'D') // find date and time of timeslot with most steps
+            {
+
+            }
+            if (choice == 'E') // find mean step count
+            {
+
+            }
+            if (choice == 'F') // find longest continious period of over 500 steps
+            {
+
+            }
+        }
+        else
+        {
+            printf("Invalid choice. Try again.\n");
+        }
+    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
