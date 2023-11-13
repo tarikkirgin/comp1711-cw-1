@@ -41,12 +41,18 @@ void tokeniseRecord(const char *input, const char *delimiter,
     // Free the duplicated string
     free(inputCopy);
 }
-FITNESS_DATA read_file(char filename[]);
-int get_record_count(FITNESS_DATA data[]);
-FITNESS_DATA get_fewest_steps(FITNESS_DATA data[]);
-FITNESS_DATA get_most_steps(FITNESS_DATA data[]);
-int calc_mean_steps(FITNESS_DATA data[]);
-FITNESS_DATA get_continous_period(FITNESS_DATA data[], int minimum_steps);
+
+void print_menu_options()
+{
+    printf("Menu Options:\n");
+    printf("A: Specify the filename to be imported\n");
+    printf("B: Display the total number of records in the file\n");
+    printf("C: Find the date and time of the timeslot with the fewest steps\n");
+    printf("D: Find the date and time of the timeslot with the largest number of steps\n");
+    printf("E: Find the mean step count of all the records in the file\n");
+    printf("F: Find the longest continous period where the step count is above 500 steps\n");
+    printf("Q: Quit\n");
+}
 
 // Complete the main function
 int main() {
