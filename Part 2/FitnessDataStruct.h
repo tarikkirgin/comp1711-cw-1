@@ -13,6 +13,7 @@ typedef struct {
 
 // Helper function prototypes
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
+void print_record(FITNESS_DATA data);
 void print_menu_options();
 void read_file(char filename[]);
 FITNESS_DATA get_fewest_steps(FITNESS_DATA data[]);

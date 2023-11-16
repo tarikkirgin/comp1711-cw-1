@@ -43,6 +43,11 @@ void tokeniseRecord(const char *input, const char *delimiter,
     free(inputCopy);
 }
 
+void print_record(FITNESS_DATA record)
+{
+    printf("%s %s\n", record.date, record.time);
+}
+
 void print_menu_options()
 {
     printf("Menu Options:\n");
@@ -107,7 +112,41 @@ void read_file(char filename[])
     }
 }
 
+FITNESS_DATA get_fewest_steps(FITNESS_DATA data[])
+{
+    FITNESS_DATA lowest_step_record = data[0];
+    for (int i = 1; i < record_count; i++)
+    {
+        if(data[i].steps < lowest_step_record.steps)
+        {
+            lowest_step_record = data[i];
+        }
+    }
+    return lowest_step_record;
+}
 
+FITNESS_DATA get_most_steps(FITNESS_DATA data[])
+{
+    FITNESS_DATA highest_step_record = data[0];
+    for (int i = 1; i < record_count; i++)
+    {
+        if(data[i].steps > highest_step_record.steps)
+        {
+            highest_step_record = data[i];
+        }
+    }
+    return highest_step_record;
+}
+
+int calc_mean_steps(FITNESS_DATA data[])
+{
+    int sum = 0;
+    for (int i = 1; i < record_count; i++)
+    {
+        sum+=data[i].steps;
+    }
+    return sum;
+}
 
 // Complete the main function
 int main()
@@ -134,23 +173,23 @@ int main()
             }
             if (choice == 'B') // display total number of records
             {
-                printf("record_count: %d\n", record_count);
+                printf("Total records: %d\n", record_count);
             }
             if (choice == 'C') // find date and time of timeslot with fewest steps
             {
-
+                print_record(get_fewest_steps(data));
             }
             if (choice == 'D') // find date and time of timeslot with most steps
             {
-
+                print_record(get_most_steps(data));
             }
             if (choice == 'E') // find mean step count
             {
-
+                printf("Mean step count: %d\n", calc_mean_steps(data));
             }
             if (choice == 'F') // find longest continious period of over 500 steps
             {
-
+                
             }
         }
         else
