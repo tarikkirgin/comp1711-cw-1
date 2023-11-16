@@ -140,12 +140,17 @@ FITNESS_DATA get_most_steps(FITNESS_DATA data[])
 
 int calc_mean_steps(FITNESS_DATA data[])
 {
-    int sum = 0;
+    float sum = 0;
     for (int i = 1; i < record_count; i++)
     {
         sum+=data[i].steps;
     }
-    return sum;
+    float mean = sum/record_count;
+    if(mean - (int)mean >= 0.5)
+    {
+        return mean+1;
+    }
+    return mean;
 }
 
 // Complete the main function
