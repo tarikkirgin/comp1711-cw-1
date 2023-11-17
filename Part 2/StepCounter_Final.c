@@ -45,7 +45,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
     free(inputCopy);
 }
 
-void format_record(char* formatted_record, FITNESS_DATA record)
+void format_record(char *formatted_record, FITNESS_DATA record)
 {
     sprintf(formatted_record, "%s %s", record.date, record.time);
 }
@@ -119,7 +119,7 @@ FITNESS_DATA get_fewest_steps(FITNESS_DATA data[])
     FITNESS_DATA lowest_step_record = data[0];
     for (int i = 1; i < record_count; i++)
     {
-        if(data[i].steps < lowest_step_record.steps)
+        if (data[i].steps < lowest_step_record.steps)
         {
             lowest_step_record = data[i];
         }
@@ -132,7 +132,7 @@ FITNESS_DATA get_most_steps(FITNESS_DATA data[])
     FITNESS_DATA highest_step_record = data[0];
     for (int i = 1; i < record_count; i++)
     {
-        if(data[i].steps > highest_step_record.steps)
+        if (data[i].steps > highest_step_record.steps)
         {
             highest_step_record = data[i];
         }
@@ -145,12 +145,12 @@ int calc_mean_steps(FITNESS_DATA data[])
     float sum = 0;
     for (int i = 1; i < record_count; i++)
     {
-        sum+=data[i].steps;
+        sum += data[i].steps;
     }
-    float mean = sum/record_count;
-    if(mean - (int)mean >= 0.5)
+    float mean = sum / record_count;
+    if (mean - (int)mean >= 0.5)
     {
-        return mean+1;
+        return mean + 1;
     }
     return mean;
 }
@@ -161,22 +161,22 @@ void get_continous_period(int minimum_steps, FITNESS_DATA *start_record, FITNESS
     int curr_period_length = 0;
     for (int i = 0; i < record_count; i++)
     {
-        if(data[i].steps >= minimum_steps)
+        if (data[i].steps >= minimum_steps)
         {
             for (int j = i + 1; j < record_count; j++)
-            {            
-                if(data[j].steps < minimum_steps)
-                {   
-                    if(curr_period_length > longest_period_length)
+            {
+                if (data[j].steps < minimum_steps)
+                {
+                    if (curr_period_length > longest_period_length)
                     {
                         longest_period_length = curr_period_length;
                         *start_record = data[i];
-                        *end_record = data[j-1];
+                        *end_record = data[j - 1];
                     }
                     curr_period_length = 0;
                     break;
                 }
-                curr_period_length++;   
+                curr_period_length++;
             }
         }
     }
@@ -194,38 +194,38 @@ int main()
         {
         case 'A': // filename input
         case 'a':
-                printf("Input filename: ");
+            printf("Input filename: ");
             scanf(" %s", filename);
-                read_file(filename);
+            read_file(filename);
             break;
         case 'B': // display total number of records
         case 'b':
-                printf("Total records: %d\n", record_count);
+            printf("Total records: %d\n", record_count);
             break;
         case 'C': // find date and time of timeslot with fewest steps
         case 'c':
-                format_record(record, get_fewest_steps(data));
-                printf("Fewest steps: %s\n", record);
+            format_record(record, get_fewest_steps(data));
+            printf("Fewest steps: %s\n", record);
             break;
         case 'D': // find date and time of timeslot with most steps
         case 'd':
-                format_record(record, get_most_steps(data));
-                printf("Largest steps: %s\n", record);
+            format_record(record, get_most_steps(data));
+            printf("Largest steps: %s\n", record);
             break;
         case 'E': // find mean step count
         case 'e':
-                printf("Mean step count: %d\n", calc_mean_steps(data));
+            printf("Mean step count: %d\n", calc_mean_steps(data));
             break;
         case 'F': // find longest continious period of over 500 steps
         case 'f':;
-                FITNESS_DATA start_record = {};
-                FITNESS_DATA end_record = {};
-                get_continous_period(500, &start_record, &end_record);
+            FITNESS_DATA start_record = {};
+            FITNESS_DATA end_record = {};
+            get_continous_period(500, &start_record, &end_record);
 
-                format_record(record, start_record);
-                printf("Longest period start: %s\n", record);
-                format_record(record, end_record);
-                printf("Longest period end: %s\n", record);
+            format_record(record, start_record);
+            printf("Longest period start: %s\n", record);
+            format_record(record, end_record);
+            printf("Longest period end: %s\n", record);
             break;
         case 'Q': // quit program with 0 exit code
         case 'q':
