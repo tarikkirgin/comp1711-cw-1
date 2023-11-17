@@ -143,7 +143,7 @@ FITNESS_DATA get_most_steps(FITNESS_DATA data[])
 int calc_mean_steps(FITNESS_DATA data[])
 {
     float sum = 0;
-    for (int i = 1; i < record_count; i++)
+    for (int i = 0; i < record_count; i++)
     {
         sum += data[i].steps;
     }
@@ -212,12 +212,13 @@ int main()
             format_record(record, get_most_steps(data));
             printf("Largest steps: %s\n", record);
             break;
+        // XXX: MIGHT BE WRONG
         case 'E': // find mean step count
         case 'e':
             printf("Mean step count: %d\n", calc_mean_steps(data));
             break;
         case 'F': // find longest continious period of over 500 steps
-        case 'f':;
+        case 'f':; //(; exists due to C weirdness)
             FITNESS_DATA start_record = {};
             FITNESS_DATA end_record = {};
             get_continous_period(500, &start_record, &end_record);
