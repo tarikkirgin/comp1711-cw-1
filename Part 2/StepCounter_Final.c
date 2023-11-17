@@ -168,7 +168,7 @@ int main()
             exit(0);
         }
         // check choice is between A-F inclusive
-        if (choice >= 65 && choice < 70)
+        if (choice >= 65 && choice <= 70)
         {
             if (choice == 'A') // filename input
             {
