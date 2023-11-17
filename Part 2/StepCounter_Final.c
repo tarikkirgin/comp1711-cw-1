@@ -217,7 +217,7 @@ int main()
             {
                 char record[20];
                 format_record(record, get_most_steps(data));
-                printf("Fewest steps: %s\n", record);
+                printf("Largest steps: %s\n", record);
             }
             if (choice == 'E') // find mean step count
             {
