@@ -153,6 +153,33 @@ int calc_mean_steps(FITNESS_DATA data[])
     return mean;
 }
 
+void get_continous_period(int minimum_steps, FITNESS_DATA *start_record, FITNESS_DATA *end_record)
+{
+    int longest_period_length = 0;
+    int curr_period_length = 0;
+    for (int i = 0; i < record_count; i++)
+    {
+        if(data[i].steps >= minimum_steps)
+        {
+            for (int j = i + 1; j < record_count; j++)
+            {            
+                if(data[j].steps < minimum_steps)
+                {   
+                    if(curr_period_length > longest_period_length)
+                    {
+                        longest_period_length = curr_period_length;
+                        *start_record = data[i];
+                        *end_record = data[j-1];
+                    }
+                    curr_period_length = 0;
+                    break;
+                }
+                curr_period_length++;   
+            }
+        }
+    }
+}
+
 // Complete the main function
 int main()
 {
@@ -196,7 +223,13 @@ int main()
             }
             if (choice == 'F') // find longest continious period of over 500 steps
             {
-                
+                FITNESS_DATA start_record = {};
+                FITNESS_DATA end_record = {};
+                get_continous_period(500, &start_record, &end_record);
+                printf("Longest period start: ");
+                print_record(start_record);
+                printf("Longest period end: ");
+                print_record(end_record);
             }
         }
         else

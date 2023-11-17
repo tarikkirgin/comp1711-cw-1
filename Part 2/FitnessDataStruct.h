@@ -19,6 +19,6 @@ void read_file(char filename[]);
 FITNESS_DATA get_fewest_steps(FITNESS_DATA data[]);
 FITNESS_DATA get_most_steps(FITNESS_DATA data[]);
 int calc_mean_steps(FITNESS_DATA data[]);
-FITNESS_DATA get_continous_period(FITNESS_DATA data[], int minimum_steps);
+void get_continous_period(int minimum_steps, FITNESS_DATA *start_record, FITNESS_DATA *end_record);
 
 #endif // FITNESS_DATA_STRUCT_H
