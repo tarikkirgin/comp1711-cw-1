@@ -182,10 +182,12 @@ int main()
             }
             if (choice == 'C') // find date and time of timeslot with fewest steps
             {
+                printf("Fewest steps: ");
                 print_record(get_fewest_steps(data));
             }
             if (choice == 'D') // find date and time of timeslot with most steps
             {
+                printf("Largest steps: ");
                 print_record(get_most_steps(data));
             }
             if (choice == 'E') // find mean step count
