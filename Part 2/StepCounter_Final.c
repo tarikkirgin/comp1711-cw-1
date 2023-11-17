@@ -212,7 +212,6 @@ int main()
             format_record(record, get_most_steps(data));
             printf("Largest steps: %s\n", record);
             break;
-        // XXX: MIGHT BE WRONG
         case 'E': // find mean step count
         case 'e':
             printf("Mean step count: %d\n", calc_mean_steps(data));
