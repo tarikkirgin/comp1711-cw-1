@@ -10,6 +10,7 @@
 char filename[20];
 FITNESS_DATA data[300];
 int record_count = 0;
+char record[20];
 char choice;
 
 // This is your helper function. Do not change it in any way.
@@ -189,42 +190,34 @@ int main()
         print_menu_options();
         printf("Enter choice: ");
         scanf(" %c", &choice);
-        if(choice == 'Q')
+        switch (choice)
         {
-            exit(0);
-        }
-        // check choice is between A-F inclusive
-        if (choice >= 65 && choice <= 70)
-        {
-            if (choice == 'A') // filename input
-            {
+        case 'A': // filename input
+        case 'a':
                 printf("Input filename: ");
-                scanf(" %s", &filename);
+            scanf(" %s", filename);
                 read_file(filename);
-            }
-            if (choice == 'B') // display total number of records
-            {
+            break;
+        case 'B': // display total number of records
+        case 'b':
                 printf("Total records: %d\n", record_count);
-            }
-            if (choice == 'C') // find date and time of timeslot with fewest steps
-            {
-                char record[20];
+            break;
+        case 'C': // find date and time of timeslot with fewest steps
+        case 'c':
                 format_record(record, get_fewest_steps(data));
                 printf("Fewest steps: %s\n", record);
-            }
-            if (choice == 'D') // find date and time of timeslot with most steps
-            {
-                char record[20];
+            break;
+        case 'D': // find date and time of timeslot with most steps
+        case 'd':
                 format_record(record, get_most_steps(data));
                 printf("Largest steps: %s\n", record);
-            }
-            if (choice == 'E') // find mean step count
-            {
+            break;
+        case 'E': // find mean step count
+        case 'e':
                 printf("Mean step count: %d\n", calc_mean_steps(data));
-            }
-            if (choice == 'F') // find longest continious period of over 500 steps
-            {
-                char record[20];
+            break;
+        case 'F': // find longest continious period of over 500 steps
+        case 'f':;
                 FITNESS_DATA start_record = {};
                 FITNESS_DATA end_record = {};
                 get_continous_period(500, &start_record, &end_record);
@@ -233,11 +226,13 @@ int main()
                 printf("Longest period start: %s\n", record);
                 format_record(record, end_record);
                 printf("Longest period end: %s\n", record);
-            }
-        }
-        else
-        {
+            break;
+        case 'Q': // quit program with 0 exit code
+        case 'q':
+            exit(0);
+        default:
             printf("Invalid choice. Try again.\n");
+            break;
         }
     }
     return 0;
