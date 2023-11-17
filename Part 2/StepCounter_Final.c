@@ -10,6 +10,7 @@
 char filename[20];
 FITNESS_DATA data[300];
 int record_count = 0;
+char choice;
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -183,9 +184,7 @@ void get_continous_period(int minimum_steps, FITNESS_DATA *start_record, FITNESS
 // Complete the main function
 int main()
 {
-    char choice = 'X';
-    int choice_valid = 0;
-    while (!choice_valid)
+    while (1)
     {
         print_menu_options();
         printf("Enter choice: ");
