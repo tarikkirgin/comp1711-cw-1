@@ -97,6 +97,7 @@ void open_file(char filename[])
     }
 }
 
+// Checks if record is valid
 int record_is_valid(char line[])
 {
     int error_found = 0;
@@ -109,43 +110,39 @@ int record_is_valid(char line[])
     // https://stackoverflow.com/questions/7607550/scanf-skip-variable
 
     char pattern[] =
-        "%[0-9]%[0-9]%[0-9]%[0-9]" // year
+        "%*1[0-9]%*1[0-9]%*1[0-9]%*1[0-9]" // year
         "-"
-        "%[0-1]%[0-9]" // month
+        "%*1[0-1]%*1[0-9]" // month
         "-"
-        "%[0-3]%[0-9]" // date
+        "%*1[0-3]%*1[0-9]" // date
         ","
-        "%[0-2]%[0-9]" // hour
+        "%*1[0-2]%*1[0-9]" // hour
         ":"
-        "%[0-5]%[0-9]" // minute
+        "%*1[0-5]%*1[0-9]" // minute
         ","
         "%d"; // steps
 
-    char pattern2[] =
-        "%1d%1d%1d%1d" // year
-        "-"
-        "%1d%1d" // month
-        "-"
-        "%1d%1d" // date
-        ","
-        "%1d%1d" // hour
-        ":"
-        "%1d%1d" // minute
-        ","
-        "%d"; // steps
-
-    // sscanf() returns the number of variables successfuly read
+    // sscanf() returns the number of variables successfully read
     // should be 13 if record is correctly formatted (12 in date & time, 1 for the steps)
 
-    int year_1, year_2, year_3, year_4, month_1, month_2, date_1, date_2, hour_1, hour_2, minute_1, minute_2, steps;
+    // char year_1, year_2, year_3, year_4, month_1, month_2, date_1, date_2, hour_1, hour_2, minute_1, minute_2;
+    // int steps;
 
-    if (sscanf(line, pattern2, &year_1, &year_2, &year_3, &year_4, &month_1, &month_2, &date_1, &date_2, &hour_1, &hour_2, &minute_1, &minute_2, &steps) != 13)
+    // if (sscanf(line, pattern, &year_1, &year_2, &year_3, &year_4, &month_1, &month_2, &date_1, &date_2, &hour_1, &hour_2, &minute_1, &minute_2, &steps) != 13)
+    // {
+    //     error_found = 1;
+    // }
+
+    if (sscanf(line, pattern) != 13)
     {
         error_found = 1;
     }
 
+
     return !error_found;
 }
+
+
 
 int main()
 {
@@ -153,6 +150,5 @@ int main()
     scanf(" %s", filename);
     open_file(filename);
 
-    // debugging
-    printf("file had no errors\n");
+
 }
