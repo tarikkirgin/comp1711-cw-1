@@ -133,11 +133,8 @@ int record_is_valid(char line[])
     //     error_found = 1;
     // }
 
-    if (sscanf(line, pattern) != 13)
-    {
-        error_found = 1;
-    }
 
+    error_found = !sscanf(line, pattern);
 
     return !error_found;
 }
