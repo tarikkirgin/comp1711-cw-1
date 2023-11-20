@@ -40,6 +40,7 @@ int record_count = 0;
 void open_file(char filename[]);
 int record_is_valid(char line[]);
 void sort_records(FitnessData fitness_data_array[]);
+void write_file(char filename[], FitnessData fitness_data_array[]);
 
 // Function to open a record
 void open_file(char filename[])
@@ -162,11 +163,30 @@ void sort_records(FitnessData fitness_data_array[])
     }
 }
 
+void write_file(char filename[], FitnessData fitness_data_array[])
+{
+
+    FILE *file = fopen(filename, "w");
+    for (int record = 0; record < record_count; record++)
+    {
+        fprintf(file, "%s\t%s\t%d\n", fitness_data_array[record].date, fitness_data_array[record].time, fitness_data_array[record].steps);
+    }
+    fclose(file);
+}
+
 int main()
 {
     printf("Enter filename: \n");
     scanf(" %s", filename);
     open_file(filename);
 
+    sort_records(data);
 
+    char new_filename[24];
+    strcpy(new_filename, filename);
+    strcat(new_filename, ".tsv");
+
+    write_file(new_filename, sorted_data);
+
+    return 0;
 }
