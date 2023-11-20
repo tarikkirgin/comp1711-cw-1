@@ -104,25 +104,19 @@ void open_file(char filename[])
 // Checks if record is valid
 int record_is_valid(char line[])
 {
-    int error_found = 0;
-
     // based on an idea from here:
     // https://stackoverflow.com/questions/16013031/ensure-a-string-matches-a-certain-format-in-c
 
-    // asterisks mean values are not saved
-    // learned this from here:
-    // https://stackoverflow.com/questions/7607550/scanf-skip-variable
-
     char pattern[] =
-        "%*1[0-9]%*1[0-9]%*1[0-9]%*1[0-9]" // year
+        "%1[0-9]%1[0-9]%1[0-9]%1[0-9]" // year
         "-"
-        "%*1[0-1]%*1[0-9]" // month
+        "%1[0-1]%1[0-9]" // month
         "-"
-        "%*1[0-3]%*1[0-9]" // date
+        "%1[0-3]%1[0-9]" // date
         ","
-        "%*1[0-2]%*1[0-9]" // hour
+        "%1[0-2]%1[0-9]" // hour
         ":"
-        "%*1[0-5]%*1[0-9]" // minute
+        "%1[0-5]%1[0-9]" // minute
         ","
         "%d"; // steps
 
@@ -137,10 +131,12 @@ int record_is_valid(char line[])
     //     error_found = 1;
     // }
 
-
-    error_found = !sscanf(line, pattern);
-
-    return !error_found;
+    // idea to use &(char){0} to discard values from here:
+    // https://stackoverflow.com/questions/10150976/c-sscanf-assignment-suppression-and-the-return-value/65718687#65718687
+    if(13 == sscanf(line, pattern, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0} ,&(char){0} ,&(char){0})){
+        return 1;
+    }
+    return 0;
 }
 
 void sort_records(FitnessData fitness_data_array[])
