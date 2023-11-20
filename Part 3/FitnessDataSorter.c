@@ -142,15 +142,18 @@ void sort_records(FitnessData fitness_data_array[])
     {
         FitnessData highest_steps_record;
         int highest_steps = -1;
+        int index;
         for (int record = 0; record < record_count; record++)
         {
             if(fitness_data_array[record].steps > highest_steps)
             {
                 highest_steps_record = fitness_data_array[record];
                 highest_steps = fitness_data_array[record].steps;
+                index = record;
             }
         }
         sorted_data[tail] = highest_steps_record;
+        data[index].steps = -1;
         tail++;
     }
 }
