@@ -7,8 +7,8 @@
 
 // Define any additional variables here
 // Global variables for filename and FITNESS_DATA array
-char filename[20];
-FITNESS_DATA data[300];
+char filename[50];
+FITNESS_DATA data[500];
 int record_count = 0;
 char record[20];
 char choice;
