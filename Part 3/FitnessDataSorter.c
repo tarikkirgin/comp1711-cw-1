@@ -171,7 +171,7 @@ void write_file(char filename[], FitnessData fitness_data_array[])
 
 int main()
 {
-    printf("Enter filename: \n");
+    printf("Enter filename: ");
     scanf(" %s", filename);
     open_file(filename);
 
@@ -182,6 +182,7 @@ int main()
     strcat(new_filename, ".tsv");
 
     write_file(new_filename, sorted_data);
+    printf("Data sorted and written to %s\n", new_filename);
 
     return 0;
 }
