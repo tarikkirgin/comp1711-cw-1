@@ -73,11 +73,12 @@ void open_file(char filename[])
             char time[6];
             int steps;
 
+            char *input = strdup(line_buffer);
             // extract data from line of file
-            tokeniseRecord(line_buffer, ',', date, time, &steps);
+            tokeniseRecord(input, ',', date, time, &steps);
 
             // create new FITNESS_DATA struct
-            FitnessData record = {};
+            FitnessData record;
 
             // populate struct with values extracted from file
             strcpy(record.date, date);
