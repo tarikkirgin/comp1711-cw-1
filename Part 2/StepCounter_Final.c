@@ -148,6 +148,7 @@ int calc_mean_steps(FITNESS_DATA data[])
         sum += data[i].steps;
     }
     float mean = sum / record_count;
+    // assert if decimal part is above 0.5 for rounding
     if (mean - (int)mean >= 0.5)
     {
         return mean + 1;
@@ -225,7 +226,7 @@ int main()
             printf("Mean step count: %d\n", calc_mean_steps(data));
             break;
         case 'F':  // find longest continious period of over 500 steps
-        case 'f':; //(; exists due to C weirdness)
+        case 'f':; //(; exists due to C weirdness) learned from here: https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
             FITNESS_DATA start_record = {};
             FITNESS_DATA end_record = {};
             get_continous_period(500, &start_record, &end_record);
