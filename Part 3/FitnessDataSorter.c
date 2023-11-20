@@ -76,7 +76,9 @@ void open_file(char filename[])
             char time[6];
             int steps;
 
+            // clone input string as strtok mutates the string
             char *input = strdup(line_buffer);
+
             // extract data from line of file
             tokeniseRecord(input, ',', date, time, &steps);
 
@@ -107,7 +109,7 @@ int record_is_valid(char line[])
     // based on an idea from here:
     // https://stackoverflow.com/questions/16013031/ensure-a-string-matches-a-certain-format-in-c
 
-    char pattern[] =
+    const char pattern[] =
         "%1[0-9]%1[0-9]%1[0-9]%1[0-9]" // year
         "-"
         "%1[0-1]%1[0-9]" // month
@@ -120,16 +122,6 @@ int record_is_valid(char line[])
         ","
         "%d"; // steps
 
-    // sscanf() returns the number of variables successfully read
-    // should be 13 if record is correctly formatted (12 in date & time, 1 for the steps)
-
-    // char year_1, year_2, year_3, year_4, month_1, month_2, date_1, date_2, hour_1, hour_2, minute_1, minute_2;
-    // int steps;
-
-    // if (sscanf(line, pattern, &year_1, &year_2, &year_3, &year_4, &month_1, &month_2, &date_1, &date_2, &hour_1, &hour_2, &minute_1, &minute_2, &steps) != 13)
-    // {
-    //     error_found = 1;
-    // }
 
     // idea to use &(char){0} to discard values from here:
     // https://stackoverflow.com/questions/10150976/c-sscanf-assignment-suppression-and-the-return-value/65718687#65718687
