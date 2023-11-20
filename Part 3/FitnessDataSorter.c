@@ -34,10 +34,12 @@ void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *s
 
 char filename[20];
 FitnessData data[300];
+FitnessData sorted_data[300];
 int record_count = 0;
 
 void open_file(char filename[]);
 int record_is_valid(char line[]);
+void sort_records(FitnessData fitness_data_array[]);
 
 // Function to open a record
 void open_file(char filename[])
@@ -140,7 +142,25 @@ int record_is_valid(char line[])
     return !error_found;
 }
 
-
+void sort_records(FitnessData fitness_data_array[])
+{
+    int tail = 0;
+    for (int i = 0; i < record_count; i++)
+    {
+        FitnessData highest_steps_record;
+        int highest_steps = -1;
+        for (int record = 0; record < record_count; record++)
+        {
+            if(fitness_data_array[record].steps > highest_steps)
+            {
+                highest_steps_record = fitness_data_array[record];
+                highest_steps = fitness_data_array[record].steps;
+            }
+        }
+        sorted_data[tail] = highest_steps_record;
+        tail++;
+    }
+}
 
 int main()
 {
