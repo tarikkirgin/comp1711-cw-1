@@ -149,10 +149,13 @@ void sort_records(FitnessData fitness_data_array[])
             {
                 highest_steps_record = fitness_data_array[record];
                 highest_steps = fitness_data_array[record].steps;
+                // store index of record
                 index = record;
             }
         }
+        // add highest steps remaining record to sorted_data array
         sorted_data[tail] = highest_steps_record;
+        // change record steps to -1 so it is ignored in future iterations
         data[index].steps = -1;
         tail++;
     }
@@ -160,7 +163,6 @@ void sort_records(FitnessData fitness_data_array[])
 
 void write_file(char filename[], FitnessData fitness_data_array[])
 {
-
     FILE *file = fopen(filename, "w");
     for (int record = 0; record < record_count; record++)
     {
