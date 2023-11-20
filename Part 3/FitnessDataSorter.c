@@ -32,9 +32,9 @@ void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *s
 
 // Global variables
 
-char filename[20];
-FitnessData data[300];
-FitnessData sorted_data[300];
+char filename[50];
+FitnessData data[500];
+FitnessData sorted_data[500];
 int record_count = 0;
 
 void open_file(char filename[]);
@@ -177,7 +177,7 @@ int main()
 
     sort_records(data);
 
-    char new_filename[24];
+    char new_filename[54];
     strcpy(new_filename, filename);
     strcat(new_filename, ".tsv");
 
