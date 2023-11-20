@@ -76,7 +76,7 @@ void open_file(char filename[])
             char time[6];
             int steps;
 
-            // clone input string as strtok mutates the string
+            // clone input string as tokeniseRecord mutates the string
             char *input = strdup(line_buffer);
 
             // extract data from line of file
