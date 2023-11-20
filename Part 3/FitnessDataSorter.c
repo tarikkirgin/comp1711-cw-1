@@ -129,7 +129,7 @@ int record_is_valid(char line[])
     // sscanf() returns the number of variables successfully read
     // should be 13 if record is correctly formatted (12 in date & time, 1 for the steps)
 
-    if(13 != sscanf(line, pattern, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0} ,&(char){0} ,&(char){0})){
+    if(13 != sscanf(line, pattern, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0} ,&(char){0} , &(int){0})){
         return 0;
     }
     return 1;
