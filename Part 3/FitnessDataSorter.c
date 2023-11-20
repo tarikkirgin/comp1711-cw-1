@@ -133,10 +133,14 @@ int record_is_valid(char line[])
 
     // idea to use &(char){0} to discard values from here:
     // https://stackoverflow.com/questions/10150976/c-sscanf-assignment-suppression-and-the-return-value/65718687#65718687
-    if(13 == sscanf(line, pattern, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0} ,&(char){0} ,&(char){0})){
-        return 1;
+    
+    // sscanf() returns the number of variables successfully read
+    // should be 13 if record is correctly formatted (12 in date & time, 1 for the steps)
+
+    if(13 != sscanf(line, pattern, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0}, &(char){0} ,&(char){0} ,&(char){0})){
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
 void sort_records(FitnessData fitness_data_array[])
